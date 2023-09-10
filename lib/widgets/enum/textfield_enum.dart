@@ -1,0 +1,4 @@
+enum TextFieldType {
+  password,
+  input,
+}
