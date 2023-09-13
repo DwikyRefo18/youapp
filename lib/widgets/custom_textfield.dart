@@ -1,10 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
+import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:youapp/widgets/cutom_text.dart';
 
@@ -18,14 +15,16 @@ class CustomTextField extends StatefulWidget {
     this.type = TextFieldType.input,
     this.fieldStyle = TextFieldStyle.style1,
     this.label,
-    this.controller,
+    this.autofillHints,
+    required this.textFieldBloc,
   });
 
   final String hintText;
   final TextFieldType type;
   final TextFieldStyle fieldStyle;
   final String? label;
-  final TextEditingController? controller;
+  final TextFieldBloc<dynamic> textFieldBloc;
+  final dynamic autofillHints;
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -55,8 +54,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 ))),
         Expanded(
             flex: 2,
-            child: TextField(
-              controller: widget.controller,
+            child: TextFieldBlocBuilder(
+              textFieldBloc: widget.textFieldBloc,
+              autofillHints: widget.autofillHints,
               readOnly: widget.type == TextFieldType.date ? true : false,
               onTap: widget.type == TextFieldType.date
                   ? () async {
@@ -67,13 +67,15 @@ class _CustomTextFieldState extends State<CustomTextField> {
                           lastDate: DateTime(2101));
                       if (pickedDate != null) {
                         String formattedDate = DateFormat('dd/MM/yyyy').format(pickedDate);
-                        widget.controller?.text = formattedDate;
+                        // widget.controller?.text = formattedDate;
                       }
                     }
                   : null,
               textAlign: widget.fieldStyle == TextFieldStyle.style1 ? TextAlign.left : TextAlign.right,
-              obscureText: widget.type == TextFieldType.password && showPassword ? true : false,
-              style: const TextStyle(color: Colors.white),
+              obscureText: widget.type == TextFieldType.password && !showPassword ? true : false,
+              textColor: MaterialStateProperty.resolveWith((states) {
+                return Colors.white;
+              }),
               decoration: InputDecoration(
                   suffix: widget.type == TextFieldType.password
                       ? GestureDetector(

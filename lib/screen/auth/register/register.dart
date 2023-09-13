@@ -1,12 +1,14 @@
 import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:youapp/screen/auth/register/register_form_bloc.dart';
 import 'package:youapp/widgets/button_back.dart';
 import 'package:youapp/widgets/custom_button.dart';
+import 'package:youapp/widgets/custom_textfield.dart';
+import 'package:youapp/widgets/cutom_text.dart';
+import 'package:youapp/widgets/enum/textfield_type_enum.dart';
 import 'package:youapp/widgets/layout.dart';
 
 @RoutePage()
@@ -52,42 +54,46 @@ class _RegisterPageState extends State<RegisterPage> {
                 },
                 child: ScrollableFormBlocManager(
                   formBloc: formBloc,
-                  child: SingleChildScrollView(
-                    physics: const ClampingScrollPhysics(),
-                    padding: const EdgeInsets.all(24.0),
-                    child: Column(
-                      children: [
-                        ButtonBack(),
-                        TextFieldBlocBuilder(
-                          textFieldBloc: formBloc.usernameField,
-                          autofillHints: const [AutofillHints.username],
-                          decoration: const InputDecoration(
-                              labelText: 'TextFieldBlocBuilder',
-                              prefixIcon: Icon(Icons.text_fields),
-                              hintText: "Username"),
-                        ),
-                        TextFieldBlocBuilder(
-                          textFieldBloc: formBloc.emailField,
-                          autofillHints: const [AutofillHints.email],
-                          decoration: const InputDecoration(
-                              labelText: 'TextFieldBlocBuilder',
-                              prefixIcon: Icon(Icons.text_fields),
-                              hintText: "Email"),
-                        ),
-                        TextFieldBlocBuilder(
-                          textFieldBloc: formBloc.passwordField,
-                          autofillHints: const [AutofillHints.password],
-                          suffixButton: SuffixButton.obscureText,
-                          decoration: const InputDecoration(
-                              labelText: 'TextFieldBlocBuilder',
-                              prefixIcon: Icon(Icons.text_fields),
-                              hintText: "Password"),
-                        ),
-                        CustomButton(
-                          title: "Register",
-                          onTap: formBloc.submit,
-                        ),
-                      ],
+                  child: AppLayout(
+                    child: SingleChildScrollView(
+                      physics: const ClampingScrollPhysics(),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ButtonBack(),
+                          SizedBox(height: 40),
+                          CustomText(
+                            title: "Register",
+                            margin: EdgeInsets.only(left: 30),
+                            fontSize: 24,
+                            fontWeight: FontWeight.w700,
+                          ),
+                          SizedBox(height: 20),
+                          CustomTextField(
+                            textFieldBloc: formBloc.emailField,
+                            hintText: "Enter Email",
+                          ),
+                          CustomTextField(
+                            hintText: "Create Username",
+                            textFieldBloc: formBloc.usernameField,
+                          ),
+                          CustomTextField(
+                            hintText: "Create Password",
+                            textFieldBloc: formBloc.passwordField,
+                            type: TextFieldType.password,
+                          ),
+                          CustomTextField(
+                            hintText: "Confirm Password",
+                            textFieldBloc: formBloc.confirmPassword,
+                            type: TextFieldType.password,
+                          ),
+                          SizedBox(height: 15),
+                          CustomButton(
+                            title: "Register",
+                            onTap: formBloc.submit,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 )),

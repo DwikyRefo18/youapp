@@ -30,9 +30,9 @@ class LoginPage extends StatelessWidget {
               fontWeight: FontWeight.w700,
             ),
             SizedBox(height: 20),
-            CustomTextField(hintText: "Enter Username/Email"),
+            // CustomTextField(hintText: "Enter Username/Email"),
             SizedBox(height: 15),
-            CustomTextField(hintText: "Enter Password", type: TextFieldType.password),
+            // CustomTextField(hintText: "Enter Password", type: TextFieldType.password),
             SizedBox(height: 25),
             CustomButton(
               title: "Login",

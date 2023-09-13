@@ -12,13 +12,32 @@ class RegisterFormBloc extends FormBloc<String, String> {
   final passwordField =
       TextFieldBloc(validators: [FieldBlocValidators.passwordMin6Chars, FieldBlocValidators.required]);
   final usernameField = TextFieldBloc(validators: [FieldBlocValidators.required]);
+  final confirmPassword = TextFieldBloc(
+    validators: [FieldBlocValidators.required],
+  );
+
+  Validator<String> _confirmPassword(
+    TextFieldBloc passwordTextFieldBloc,
+  ) {
+    return (String? confirmPassword) {
+      if (confirmPassword == passwordTextFieldBloc.value) {
+        return null;
+      }
+      return 'Must be equal to password';
+    };
+  }
 
   RegisterFormBloc() : super(autoValidate: true) {
     addFieldBlocs(fieldBlocs: [
       emailField,
       passwordField,
       usernameField,
+      confirmPassword,
     ]);
+
+    confirmPassword
+      ..addValidators([_confirmPassword(passwordField)])
+      ..subscribeToFieldBlocs([passwordField]);
   }
   @override
   void onSubmitting() async {
