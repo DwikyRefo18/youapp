@@ -6,7 +6,7 @@ import 'package:youapp/widgets/button_back.dart';
 import 'package:youapp/widgets/custom_button.dart';
 import 'package:youapp/widgets/custom_textfield.dart';
 import 'package:youapp/widgets/cutom_text.dart';
-import 'package:youapp/widgets/enum/textfield_enum.dart';
+import 'package:youapp/widgets/enum/textfield_type_enum.dart';
 import 'package:youapp/widgets/layout.dart';
 
 @RoutePage()
@@ -50,7 +50,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    AutoRouter.of(context).push(const RegisterRoute());
+                    AutoRouter.of(context).push(const ProfileRoute());
                   },
                   child: CustomText(
                     title: "Register Here",

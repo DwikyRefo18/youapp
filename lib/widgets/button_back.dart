@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:youapp/widgets/cutom_text.dart';
 
@@ -6,19 +7,23 @@ class ButtonBack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
-      children: [
-        Icon(
-          Icons.chevron_left,
-          color: Colors.white,
-          size: 30,
-        ),
-        SizedBox(width: 4),
-        CustomText(
-          title: "Back",
-          fontWeight: FontWeight.w700,
-        )
-      ],
+    return GestureDetector(
+      onTap: () {
+        AutoRouter.of(context).back();
+      },
+      child: Row(
+        children: [
+          Icon(
+            Icons.chevron_left,
+            color: Colors.white,
+          ),
+          SizedBox(width: 4),
+          CustomText(
+            title: "Back",
+            fontWeight: FontWeight.w700,
+          )
+        ],
+      ),
     );
   }
 }

@@ -7,4 +7,5 @@ abstract class ColorsHelper {
   static const gold = Color.fromARGB(255, 211, 173, 98);
   static const button1 = Color(0xFF62CDCB);
   static const button2 = Color(0xFF4599DB);
+  static const box1 = Color(0xFF0E191F);
 }

@@ -10,6 +10,7 @@ class AppLayout extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(18),
       width: double.infinity,
+      constraints: BoxConstraints(minHeight: double.infinity),
       decoration: const BoxDecoration(
         gradient: LinearGradient(begin: Alignment.centerLeft, end: Alignment.centerRight, colors: [
           ColorsHelper.bg3,
