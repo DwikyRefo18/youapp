@@ -50,7 +50,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    AutoRouter.of(context).push(const ProfileRoute());
+                    AutoRouter.of(context).push(const RegisterRoute());
                   },
                   child: CustomText(
                     title: "Register Here",
