@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:youapp/widgets/cutom_text.dart';
 
 class CustomDropdown extends StatelessWidget {
@@ -7,26 +8,16 @@ class CustomDropdown extends StatelessWidget {
     this.label,
     required this.onSelected,
     this.hintText,
-    required this.list,
+    required this.items,
+    this.selectFieldBloc,
   });
   final String? label;
   final Function(String?)? onSelected;
   final String? hintText;
-  final List<String> list;
+  final List<String> items;
+  final SelectFieldBloc<String, dynamic>? selectFieldBloc;
   @override
   Widget build(BuildContext context) {
-    Color getColor(Set<MaterialState> states) {
-      const Set<MaterialState> interactiveStates = <MaterialState>{
-        MaterialState.pressed,
-        MaterialState.hovered,
-        MaterialState.focused,
-      };
-      if (states.any(interactiveStates.contains)) {
-        return Colors.blue;
-      }
-      return Colors.red;
-    }
-
     return Row(
       children: [
         Visibility(
@@ -54,8 +45,15 @@ class CustomDropdown extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                     fontFamily: "Inter",
                   ),
+                  hint: Align(
+                    alignment: Alignment.centerRight,
+                    child: CustomText(
+                      title: "Select Gender",
+                      color: Colors.white.withOpacity(0.06),
+                    ),
+                  ),
                   selectedItemBuilder: (BuildContext context) {
-                    return list.map<Widget>((String item) {
+                    return items.map<Widget>((String item) {
                       // This is the widget that will be shown when you select an item.
                       // Here custom text style, alignment and layout size can be applied
                       // to selected item string.
@@ -63,15 +61,17 @@ class CustomDropdown extends StatelessWidget {
                         constraints: BoxConstraints(minWidth: 170),
                         child: CustomText(
                           title: item,
-                          color: Colors.white.withOpacity(0.4),
+                          color: Colors.white,
                           textAlign: TextAlign.right,
                         ),
                       );
                     }).toList();
                   },
-                  decoration: InputDecoration(border: InputBorder.none),
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                  ),
                   dropdownColor: Colors.black,
-                  items: list.map<DropdownMenuItem<String>>((String value) {
+                  items: items.map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                         value: value,
                         child: Align(

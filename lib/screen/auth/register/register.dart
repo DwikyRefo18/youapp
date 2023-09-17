@@ -3,6 +3,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
+import 'package:youapp/constants/colors.dart';
+import 'package:youapp/router/app_router.gr.dart';
 import 'package:youapp/screen/auth/register/register_form_bloc.dart';
 import 'package:youapp/widgets/button_back.dart';
 import 'package:youapp/widgets/custom_button.dart';
@@ -92,6 +94,29 @@ class _RegisterPageState extends State<RegisterPage> {
                             title: "Register",
                             onTap: formBloc.submit,
                           ),
+                          SizedBox(height: 20),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              CustomText(
+                                title: "No account?",
+                                fontWeight: FontWeight.w500,
+                              ),
+                              SizedBox(
+                                width: 4,
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  AutoRouter.of(context).push(const LoginRoute());
+                                },
+                                child: CustomText(
+                                  title: "Login Here",
+                                  color: ColorsHelper.gold,
+                                  decoration: TextDecoration.underline,
+                                ),
+                              ),
+                            ],
+                          )
                         ],
                       ),
                     ),
