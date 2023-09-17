@@ -60,15 +60,15 @@ class EditAboutWidget extends StatelessWidget {
                 CustomTextField(
                   hintText: "--",
                   fieldStyle: TextFieldStyle.style2,
-                  label: "Horoscope:",
-                  textFieldBloc: formBloc.horoscope,
+                  label: "Zodiac:",
+                  textFieldBloc: formBloc.zodiac,
                 ),
                 const SizedBox(height: 8),
                 CustomTextField(
                   hintText: "--",
                   fieldStyle: TextFieldStyle.style2,
-                  label: "Zodiac:",
-                  textFieldBloc: formBloc.zodiac,
+                  label: "Horoscope:",
+                  textFieldBloc: formBloc.horoscope,
                 ),
                 const SizedBox(height: 8),
                 CustomDropdown(

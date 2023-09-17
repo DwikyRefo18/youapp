@@ -46,6 +46,8 @@ class _RegisterPageState extends State<RegisterPage> {
                     'Data berhasil di submit',
                     type: AnimatedSnackBarType.success, // Position of snackbar on desktop devices
                   ).show(context);
+
+                  AutoRouter.of(context).push(const HomeRoute());
                 },
                 onFailure: (context, state) {
                   EasyLoading.dismiss();
