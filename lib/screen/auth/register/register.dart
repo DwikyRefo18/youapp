@@ -47,7 +47,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     type: AnimatedSnackBarType.success, // Position of snackbar on desktop devices
                   ).show(context);
 
-                  AutoRouter.of(context).push(const HomeRoute());
+                  AutoRouter.of(context).back();
                 },
                 onFailure: (context, state) {
                   EasyLoading.dismiss();

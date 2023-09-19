@@ -47,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
                   'Data berhasil di submit',
                   type: AnimatedSnackBarType.success, // Position of snackbar on desktop devices
                 ).show(context);
-                
+                AutoRouter.of(context).push(const ProfileRoute());
               },
               onFailure: (context, state) {
                 EasyLoading.dismiss();

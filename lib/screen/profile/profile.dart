@@ -1,8 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:youapp/router/app_router.gr.dart';
 import 'package:youapp/screen/profile/widgets/about_widget.dart';
 import 'package:youapp/screen/profile/widgets/interest_widget.dart';
 import 'package:youapp/widgets/button_back.dart';
+import 'package:youapp/widgets/custom_button.dart';
 import 'package:youapp/widgets/custom_image.dart';
 import 'package:youapp/widgets/cutom_text.dart';
 import 'package:youapp/widgets/layout.dart';
@@ -70,7 +73,16 @@ class _ProfilePageState extends State<ProfilePage> {
             SizedBox(height: 27),
             isEdit == true ? EditAboutWidget(onTap: toogleEditProfile) : AboutWidget(onTap: toogleEditProfile),
             SizedBox(height: 27),
-            InterestWidget()
+            InterestWidget(),
+            SizedBox(height: 27),
+            CustomButton(
+              title: "Logout",
+              onTap: () async {
+                final SharedPreferences prefs = await SharedPreferences.getInstance();
+                prefs.remove("token");
+                AutoRouter.of(context).replace(const LoginRoute());
+              },
+            )
           ],
         ),
       ))),
