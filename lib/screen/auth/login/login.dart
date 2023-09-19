@@ -5,9 +5,12 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:youapp/constants/colors.dart';
 import 'package:youapp/router/app_router.gr.dart';
 import 'package:youapp/screen/auth/login/login_form_bloc.dart';
+import 'package:youapp/screen/home/home.dart';
+import 'package:youapp/screen/profile/profile.dart';
 import 'package:youapp/widgets/button_back.dart';
 import 'package:youapp/widgets/custom_button.dart';
 import 'package:youapp/widgets/custom_textfield.dart';
@@ -87,9 +90,14 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         SizedBox(height: 15),
                         CustomButton(
-                          title: "Login",
-                          onTap: formBloc.submit,
-                        ),
+                            title: "Login",
+                            onTap: () async {
+                              formBloc.onSubmitting();
+                              SharedPreferences prefs = await SharedPreferences.getInstance();
+                              prefs.setString('email', formBloc.emailFeild.value);
+                              Navigator.pushReplacement(
+                                  context, MaterialPageRoute(builder: (BuildContext ctx) => ProfilePage()));
+                            }),
                         SizedBox(height: 20),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -103,7 +111,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             GestureDetector(
                               onTap: () {
-                                AutoRouter.of(context).push(const ProfileRoute());
+                                AutoRouter.of(context).push(const RegisterRoute());
                               },
                               child: CustomText(
                                 title: "Register Here",

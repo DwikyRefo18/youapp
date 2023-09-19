@@ -18,7 +18,10 @@ class AboutWidget extends StatelessWidget {
         children: [
           sectionTitle(title: "About", onTap: onTap),
           const SizedBox(height: 15),
-          sectionAbout(title: "Birthday", value: "28/08/1995 (Age 28)"),
+          sectionAbout(
+            title: "Birthday",
+            value: "28/08/1995 (Age 28)",
+          ),
           const SizedBox(height: 12),
           sectionAbout(title: "Horoscope", value: "Virgo"),
           const SizedBox(height: 12),
