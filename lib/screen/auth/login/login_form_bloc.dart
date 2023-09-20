@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:form_bloc/form_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:youapp/utils/api.dart';
 import 'package:youapp/utils/exceptions.dart';
 
@@ -46,7 +47,9 @@ class LoginFormBloc extends FormBloc<String, String> {
         'password': passwordField.value,
         "username": usernameField.value,
       });
-
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString('token', 'AIUEO');
+      // print(response);
       emitSuccess(canSubmitAgain: true);
     } on DioException catch (error) {
       final data = DioExceptions.fromDioError(error);
